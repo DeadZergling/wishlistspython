@@ -1,0 +1,60 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Add an Item to Wishlist!</title>
+        <style type="text/css">
+        .one
+        {
+            display:inline-block;
+            vertical-align: top;
+            font-weight: bold;
+        }
+        .two
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:600px;
+        }
+        .twoo
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:30px;
+        }
+        .three
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:650px;
+        }
+        .four
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:25px;
+        }
+        .viewitem
+        {
+            vertical-align: top;
+        }
+        </style>
+        
+    </head>
+    <body>
+        {{itemid}}
+        <div style="height:45px;">
+            <p class=\'one\'>Create a New Wish List Item</p>
+            <a class='two' href='/wishlists/index'>Home</a>
+            <a class='twoo' href='/wishlists/logout'>Log Out</a>
+        </div>
+        <div class='viewitem'>
+            {{iteminfo[0]['item_name']}}
+
+            <h3>Users who added this product/item under their wish list: </h3>
+            {% for username in iteminfo:%}
+                {{username['user_name']}} <br>
+            {% endfor %}
+        </div>
+    </body>
+</html>

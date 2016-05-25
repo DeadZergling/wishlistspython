@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Welcome to the Page, unfortunately all the work done was on Login and Registration!</title>
+        <style type="text/css">
+        .one
+        {
+            display:inline-block;
+            vertical-align: top;
+            font-weight: bold;
+        }
+        .two
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:600px;
+        }
+        .three
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:650px;
+        }
+        .four
+        {
+            display:inline-block;
+            vertical-align: top;
+            margin-left:25px;
+        }
+        .otherusers
+        {
+            vertical-align: top;
+        }
+        </style>
+        
+    </head>
+    <body>
+        <div style="height:45px;">
+            <p class=\'one\'>Hello, {{session['loggedin_name']}} {{session['loggedin_username']}}</p>
+             <a class='two' href='/wishlists/logout'>Log Out</a>
+         </div>
+         <div class='otherusers'>
+                <h3>My Wish List</h3>
+                <table>
+                    <thead>
+                        <tr>
+                            <th>Item</th>
+                            <th>Added By</th>
+                            <th>Date Added</th>
+                            <th>Action</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                    {% for item in faves:%}
+                    <tr>   
+                        <td><a class='four' href='/wishlists/viewItem/{{item['item_id']}}'>{{item['item_name']}}</a></td>
+                        <td>{{item['added_by_name']}}</td>
+                        <td>{{item['date_added']}}</td>
+                        <td>{% if item['added_by_id'] == session['loggedin_id'] %}
+                                <a class='four' href='/wishlists/deleteInFull/{{item['item_id']}}'>Deletem!</a>
+                            {% else %}
+                                <a class='four' href='/wishlists/deleteFromList/{{item['item_id']}}'>Remove from my Wishlist</a>
+                            {% endif %}
+                            </td>
+                        <td></td>
+                    </tr>
+                    {% endfor %}
+                    </tbody>
+                </table>
+         </div>
+         <div class='wishlistothers'>
+                <h3>Other Users' Wish Lists</h3>
+            <table>
+            <thead>
+            <tr>
+            <th>Item</th>
+            <th>Added By</th>
+            <th>Date Added</th>
+            <th>Action</th>
+            </tr>
+            </thead>
+                <tbody>
+                    {% for item in others:%}
+                        <tr>   
+                        <td><a class='four' href='/wishlists/viewItem/{{item['item_id']}}'>{{item['item_name']}}</a></td>
+                        <td>{{item['added_by_name']}}</td>
+                        <td>{{item['date_added']}}</td>
+                        <td>
+                            <a class='four' href='/wishlists/addToList/{{item['item_id']}}'>Add to my Wishlist</a>
+                        </td>
+                        <td></td>
+                        </tr>
+                    {% endfor %}
+                </tbody>
+            </table>
+         </div>
+         <div class='wishlistend'>
+            <a class='three' href='/wishlists/addItemView'>Add Item</a>
+         </div>
+    </body>
+</html>
